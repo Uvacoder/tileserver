@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenLayers with MapBox Style plugin</title>
+
+  <!-- Would need to use the NPM module for production, and use version 6.0.0 to work with the plugin below -->
+  <script src="./js/ol.js"></script>
+  <!-- ol-mapbox-style plugin needed to work with vector layers within openlayers -->
+  <script src="./js/ol-mapbox-style-plugin.js"></script>
+
+  <!-- Styles for the overlay @v6.0.0 -->
+  <link rel="stylesheet" href="./css/maptiler.css">
+
+  <style>
+    #map {
+      position: absolute;
+      inset: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="map"></div>
+
+  <script>
+    const style = 'http://192.168.10.24/styles/basic-preview/style.json'
+    // const style = './js/maptiler-bright.json'
+    // const style = './js/style.json'
+
+    var map = new ol.Map({
+      target: 'map',
+      view: new ol.View({
+        constrainResolution: true,
+        center: ol.proj.fromLonLat([-0.4542955, 51.4700223]),
+        zoom: 14
+      })
+    });
+    olms.apply(map, style);
+  </script>
+
+</body>
+</html>
