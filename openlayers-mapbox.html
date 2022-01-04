@@ -25,21 +25,7 @@
 
   <div id="map"></div>
 
-  <script>
-    const style = 'http://192.168.10.24/styles/basic-preview/style.json'
-    // const style = './js/maptiler-bright.json'
-    // const style = './js/style.json'
-
-    var map = new ol.Map({
-      target: 'map',
-      view: new ol.View({
-        constrainResolution: true,
-        center: ol.proj.fromLonLat([-0.4542955, 51.4700223]),
-        zoom: 14
-      })
-    });
-    olms.apply(map, style);
-  </script>
+  <script src="./js/open-layer.js" type="module" defer></script>
 
 </body>
 </html>
