@@ -34,11 +34,21 @@ export default {
     {
       'type': 'Airport',
       'properties': {
-        'title': 'Glasgow',
+        'title': 'London City',
       },
       'geometry': {
         'type': 'Point',
-        'coordinates': [-4.433177, 55.865101]
+        'coordinates': [0.0552777778, 51.5052777778]
+      }
+    },
+    {
+      'type': 'Airport',
+      'properties': {
+        'title': 'Stanstead Airport',
+      },
+      'geometry': {
+        'type': 'Point',
+        'coordinates': [0.2377777778, 51.8838888889]
       }
     },
   ]
