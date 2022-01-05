@@ -6,35 +6,44 @@ const style = 'http://192.168.10.24/styles/basic-preview/style.json'
 
 const map = new ol.Map({
   target: 'map',
-  interactions: ol.interaction.defaults({ doubleClickZoom: false }),
-  // view: new ol.View({
-  //   constrainResolution: true,
-  //   center: ol.proj.fromLonLat([-0.4542955, 51.4700223]),
-  //   zoom: 14
-  // })
+  // interactions: ol.interaction.defaults({ doubleClickZoom: false }),
   view:  new ol.View({
     center: ol.proj.fromLonLat([-0.182063, 51.153662]),
-    zoom: 14,
-    maxZoom: 19
-  })	//SunnySide
+    zoom: 10,
+    // maxZoom: 10
+  }),
 });
-
 // openlayer map style - apply map and the style defined above
 olms.apply(map, style);
 
 
+// Create array of Airport COORDS to add to the map
+const airportLonLatArray = airports.details.map( airport => {
+  return new ol.Feature({
+    geometry: new ol.geom.Point(ol.proj.fromLonLat([
+      airport.geometry.coordinates[0], airport.geometry.coordinates[1]
+    ]))
+  })
+})
+
 // start adding points to the map
-let point = new ol.layer.Vector({
+let points = new ol.layer.Vector({
   source: new ol.source.Vector({
-    features: [
-      new ol.Feature({
-        geometry: new ol.geom.Point(ol.proj.fromLonLat([-0.182063, 51.153662]))
-      })
-    ]
+    features: airportLonLatArray
   }),
+  style: new ol.style.Style({
+    image: new ol.style.Circle({
+      radius: 5,
+      fill: new ol.style.Fill({
+        color: 'red'
+      })
+    })
+  }),
+  zIndex: 6
 });
 // adds the single point of interest on to Gatwick
-map.addLayer(point);
+map.addLayer(points);
+
 
 // add a Circle Overlay over Gatwick Airport
 let centerLongitudeLatitude = ol.proj.fromLonLat([-0.182063, 51.153662]);
