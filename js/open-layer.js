@@ -75,3 +75,48 @@ let Circle = new ol.layer.Vector({
 });
 // adds the Cicle layer object to the map
 map.addLayer(Circle)
+
+// Add random points to the map at 1second intervals
+// Gatwick [-0.182063, 51.153662]
+const bounds = {
+  north: 51.183662,
+  south: 51.133662,
+  east: -0.202063,
+  west: -0.162063,
+};
+const lngSpan = bounds.east - bounds.west
+const latSpan = bounds.north - bounds.south
+
+const source = new ol.source.Vector({
+  wrapX: false //  check API for what wrapX is
+})
+
+const vector = new ol.layer.Vector({
+  source: source, // set the above source to the new vector layer so it's visible on the map
+  style: new ol.style.Style({
+    image: new ol.style.Circle({
+      radius: 7,
+      fill: new ol.style.Fill({
+        color: 'orange'
+      })
+    })
+  }),
+  zIndex: 6
+})
+map.addLayer(vector) // very important to show the new points!
+
+function generateRandomFeature() {
+  const lon = bounds.west + lngSpan * Math.random()
+  const lat = bounds.south + latSpan * Math.random()
+
+  const geom = new ol.geom.Point(ol.proj.fromLonLat([lon,lat]))
+  const feature = new ol.Feature(geom)
+
+  source.addFeature(feature)
+}
+
+source.on('addfeature'), function () {
+  map.render();
+}
+
+window.setInterval(generateRandomFeature, 2000);
