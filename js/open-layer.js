@@ -18,7 +18,9 @@ const map = new ol.Map({
 olms.apply(map, style);
 
 
-// Create array of Airport COORDS to add to the map
+
+
+// Create Airport Array to add to the map
 const airportLonLatArray = airports.details.map( airport => {
   return new ol.Feature({
     geometry: new ol.geom.Point(ol.proj.fromLonLat([
@@ -27,8 +29,8 @@ const airportLonLatArray = airports.details.map( airport => {
   })
 })
 
-// start adding points to the map
-let points = new ol.layer.Vector({
+// create points tobe added as a layer to the map as a new vector layer
+const points = new ol.layer.Vector({
   source: new ol.source.Vector({
     features: airportLonLatArray
   }),
@@ -40,13 +42,15 @@ let points = new ol.layer.Vector({
       })
     })
   }),
-  zIndex: 6
+  zIndex: 100
 });
 // adds the single point of interest on to Gatwick
 map.addLayer(points);
 
 
-// add a Circle Overlay over Gatwick Airport
+
+
+// add a Circle overlay over Gatwick Airport
 let centerLongitudeLatitude = ol.proj.fromLonLat([-0.182063, 51.153662]);
 let viewProjection = map.getView().getProjection();
 let pointResolution = ol.proj.getPointResolution(viewProjection , 1, centerLongitudeLatitude );
