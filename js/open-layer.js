@@ -1,8 +1,10 @@
 import airports from './airports.js'
 
-const style = 'http://192.168.10.24/styles/basic-preview/style.json'
+// const style = 'http://192.168.10.24/styles/basic-preview/style.json'
 // const style = './js/maptiler-bright.json'
 // const style = './js/style.json'
+// const style = './js/style-local.json'
+const style = 'http://localhost:3650/api/maps/basic/style.json'
 
 const map = new ol.Map({
   target: 'map',
