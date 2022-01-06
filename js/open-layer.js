@@ -79,145 +79,62 @@ map.addLayer(Circle)
 
 
 
-// draw GeoJSON on map
-// const GEOstyles = [
-//   /* We are using two different styles for the polygons:
-//    *  - The first style is for the polygons themselves.
-//    *  - The second style is to draw the vertices of the polygons.
-//    *    In a custom `geometry` function the vertices of a polygon are
-//    *    returned as `MultiPoint` geometry, which will be used to render
-//    *    the style.
-//    */
-//   new ol.style.Style({
-//     stroke: new ol.style.Stroke({
-//       color: 'blue',
-//       width: 3
-//     }),
-//     fill: new ol.style.Fill({
-//       color: 'rgba(0, 0, 255, 0.1)'
-//     })
-//   }),
-//   new ol.style.Style({
-//     image: new ol.style.Circle({
-//       radius: 5,
-//       fill: new ol.style.Fill({
-//         color: 'blue'
-//       })
-//     }),
-//     geometry: function(feature) {
-//       // return the coordinates of the first ring of the polygon
-//       var coordinates = feature.getGeometry().getCoordinates()[0];
-//       return new ol.geom.MultiPoint(coordinates);
-//     }
-//   })
-// ];
-
-// const geojsonObject = {
-//   'type': 'FeatureCollection',
-//   'crs': {
-//     'type': 'name',
-//     'properties': {
-//       'name': 'EPSG:3857'
-//     }
-//   },
-//   'features': [
-//     {
-//       'type': 'Feature',
-//       'geometry': {
-//         'type': 'Polygon',
-//         'coordinates': [
-//           [
-//             [-5e6, 6e6],
-//             [-5e6, 8e6],
-//             [-3e6, 8e6],
-//             [-3e6, 6e6],
-//             [-5e6, 6e6]
-//           ]
+// sunnyside red / amber areas on map
+// let mapDataRed = {
+//   type: 'FeatureCollection',
+//   crs: { "type": "name", "Properties": { "name": "urn:ogc:def:crs:EPSG::4326" } },
+//   totalFeatures: 1,
+//   features: [{
+//     type: "Feature",
+//     id: "ProtectedAreaRed.0",
+//     geometry_name: "RedArea",
+//     geometry: {
+//       type: "Polygon",
+//       coordinates: [
+//         [
+//           [ -1.1002058078992472, 51.382176865511724 ],
+//           [ -1.1010611346245336, 51.381903440191536 ],
+//           [ -1.1010343125725803, 51.38152027003579 ],
+//           [ -1.1009687474269478, 51.38121335955111 ],
+//           [ -1.1008942418028775, 51.38081716296102 ],
+//           [ -1.1008286765836957, 51.380675796259936 ],
+//           [ -1.100664763883323, 51.38074275950581 ],
+//           [ -1.1002594523716096, 51.38093434827414 ],
+//           [ -1.099916725518632, 51.381090594778726 ],
+//           [ -1.099565058187217, 51.38122638003361 ],
+//           [ -1.0992819358334953, 51.38132310351574 ],
+//           [ -1.0992461732649088, 51.38137890545528 ],
+//           [ -1.0992938567988304, 51.381470048471755 ],
+//           [ -1.100134282525258, 51.38219546582641 ],
+//           [ -1.1002058078992472, 51.382176865511724 ]
 //         ]
-//       }
+//       ]
 //     },
-//     {
-//       'type': 'Feature',
-//       'geometry': {
-//         'type': 'Polygon',
-//         'coordinates': [[
-//           [-1.1002058078992472, 51.382176865511724],
-//           [-1.1010611346245336, 51.381903440191536],
-//           [-1.1010343125725803, 51.381520270035793],
-//           [-1.1009687474269478, 51.381213359551111],
-//           [-1.1008942418028775, 51.380817162961023],
-//           [-1.1008286765836957, 51.380675796259936],
-//           [-1.1006647638833229, 51.380742759505807],
-//           [-1.1002594523716096, 51.380934348274138],
-//           [-1.099916725518632, 51.381090594778726],
-//           [-1.0995650581872169, 51.38122638003361],
-//           [-1.0992819358334953, 51.38132310351574],
-//           [-1.0992461732649088, 51.381378905455279],
-//           [-1.0992938567988304, 51.381470048471755],
-//           [-1.100134282525258, 51.382195465826413],
-//           [-1.1002058078992472, 51.38217686551172]
-//         ]]
-//       }
-//     },
-//     {
-//       'type': 'Feature',
-//       'geometry': {
-//         'type': 'Polygon',
-//         'coordinates': [[
-//           [-1.1002058078992472, 51.382176865511724],
-//           [-1.1010611346245336, 51.381903440191536],
-//           [-1.1010343125725803, 51.381520270035793],
-//           [-1.1009687474269478, 51.381213359551111],
-//           [-1.1008942418028775, 51.380817162961023],
-//           [-1.1008286765836957, 51.380675796259936],
-//           [-1.1006647638833229, 51.380742759505807],
-//           [-1.1002594523716096, 51.380934348274138],
-//           [-1.099916725518632, 51.381090594778726],
-//           [-1.0995650581872169, 51.38122638003361],
-//           [-1.0992819358334953, 51.38132310351574],
-//           [-1.0992461732649088, 51.381378905455279],
-//           [-1.0992938567988304, 51.381470048471755],
-//           [-1.100134282525258, 51.382195465826413],
-//           [-1.1002058078992472, 51.38217686551172]
-//         ]]
-//       }
-//     },
-//     {
-//       'type': 'Feature',
-//       'geometry': {
-//         'type': 'Polygon',
-//         'coordinates': [[
-//           [-1.1002058078992472, 51.382176865511724],
-//           [-1.1010611346245336, 51.381903440191536],
-//           [-1.1010343125725803, 51.381520270035793],
-//           [-1.1009687474269478, 51.381213359551111],
-//           [-1.1008942418028775, 51.380817162961023],
-//           [-1.1008286765836957, 51.380675796259936],
-//           [-1.1006647638833229, 51.380742759505807],
-//           [-1.1002594523716096, 51.380934348274138],
-//           [-1.099916725518632, 51.381090594778726],
-//           [-1.0995650581872169, 51.38122638003361],
-//           [-1.0992819358334953, 51.38132310351574],
-//           [-1.0992461732649088, 51.381378905455279],
-//           [-1.0992938567988304, 51.381470048471755],
-//           [-1.100134282525258, 51.382195465826413],
-//           [-1.1002058078992472, 51.38217686551172]
-//         ]]
-//       }
-//     }
-//   ]
+//     properties: {},
+//   }]
 // };
 
-// const GEOSource = new ol.source.Vector({
-//   features: (new ol.format.GeoJSON()).readFeatures(geojsonObject)
-// })
+// let SSCircle = new ol.layer.Vector({
+//   zIndex: 6,
+//   source: new ol.source.Vector({
+//     features: (new ol.format.GeoJSON().readFeatures(mapDataRed, { dataProjection: 'EPSG:4326', featureProjection: 'EPSG:3857' }))
+//   }),
+//   style: [
+//     new ol.style.Style({
+//       stroke: new ol.style.Stroke({
+//         color: 'red',
+//         width: 2,
+//         lineDash: [2, 5]
+//       }),
+//       fill: new ol.style.Fill({
+//         color: 'rgba(0, 0, 255, 0.1)'
+//       })
+//     })
+//   ],
+// });
+// // adds the Cicle layer object to the map
+// map.addLayer(SSCircle)
 
-// var GEOLayer = new ol.layer.Vector({
-//   source: GEOSource,
-//   style: GEOstyles,
-//   zIndex: 100
-// })
-// map.addLayer(GEOLayer)
 
 // Add random points to the map at 1second intervals
 // Gatwick [-0.182063, 51.153662]
