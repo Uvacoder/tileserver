@@ -9,13 +9,12 @@ const style = 'http://localhost:3650/api/maps/basic/style.json'
 const map = new ol.Map({
   target: 'map',
   // interactions: ol.interaction.defaults({ doubleClickZoom: false }),
-  view:  new ol.View({
+  view: new ol.View({
     center: ol.proj.fromLonLat([-0.182063, 51.153662]),
-    zoom: 10,
-    // maxZoom: 10
-  }),
+    zoom: 13
+  })
 });
-// openlayer map style - apply map and the style defined above
+// openlayer map style plugin - apply map and the style above
 olms.apply(map, style);
 
 
